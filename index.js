@@ -2,19 +2,21 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
+const dotenv = require("dotenv"); 
 
+dotenv.config();
 const app = express();
 const port = 3001;
 
-const azureApiKey = "110c836b62924f78a17d39339ce8089e"; 
-const endpoint = "https://llm-sandy.openai.azure.com/"; 
+const azureApiKey = process.env.AZURE_API_KEY; 
+const endpoint = process.env.AZURE_ENDPOINT; 
 
 app.use(bodyParser.json());
 app.use(cors());
 
 const generateMessage = async (data) => {
   const messages = [
-    { role: "user", content: `You are a bot to help people with their tasks: ${data}` },
+    { role: "system", content: `You are a bot to help people with their tasks: ${data}` },
   ];
 
   try {
