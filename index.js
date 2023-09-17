@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-const port = 3001;
+const port = process.env.PORT;
 
 const azureApiKey = process.env.AZURE_API_KEY; 
 const endpoint = process.env.AZURE_ENDPOINT; 
@@ -21,7 +21,7 @@ const generateMessage = async (data) => {
 
   try {
     const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
-    const deploymentId = "llm";
+    const deploymentId = process.env.DEPLOYMENT_ID;
     const result = await client.getChatCompletions(deploymentId, messages);
 
     for (const choice of result.choices) {
