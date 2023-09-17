@@ -10,12 +10,12 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3001/generate-summary', {
+      const response = await fetch('http://localhost:3001/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ textToSummarize: inputMessage }),
+        body: JSON.stringify({ inpMessage: inputMessage }),
       });
 
       if (!response.ok) {
@@ -23,7 +23,7 @@ function App() {
       }
 
       const data = await response.json();
-      setResponseMessage(data.summary);
+      setResponseMessage(data.msg);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -38,7 +38,7 @@ function App() {
         onChange={handleInputChange}
         placeholder="Enter your message"
       ></textarea>
-      <button onClick={handleSubmit}>Generate Summary</button>
+      <button onClick={handleSubmit}>Submit</button>
       {responseMessage && (
         <div>
           <h2>Response:</h2>
