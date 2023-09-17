@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
+const port = 3001;
 
 const azureApiKey = process.env.AZURE_API_KEY; 
 const endpoint = process.env.AZURE_ENDPOINT; 
